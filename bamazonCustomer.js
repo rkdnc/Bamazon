@@ -59,8 +59,11 @@ function getItems() {
                     default: "Yes"
                 }]).then(inquirerResponse => {
                     if (inquirerResponse.confirm) {
-                        var itemPrice = res[product].price * productQuantity
+                        var itemPrice = res[product].price * productQuantity;
+                        var stock = res[product].stock_quantity - productQuantity;
+                        product += 1;
                         console.log(`Your total is ${itemPrice}`);
+                        updateDb(product, stock);
                     } else {
                         console.log("Have a great day");
                     }
@@ -68,6 +71,18 @@ function getItems() {
 
             }
         })
-        connection.end();
+        
     })
 };
+
+function updateDb(id, qty){
+    connection.query("UPDATE products SET ? WHERE ?",[{
+        
+        stock_quantity: qty
+    },
+    {
+        item_id: id
+    }
+    ])
+    connection.end();
+}
