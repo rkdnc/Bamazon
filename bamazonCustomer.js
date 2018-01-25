@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "!AB0hU$V",
+    password: ",
     database: "bamazon"
 });
 //Conecting to the database
@@ -15,17 +15,6 @@ connection.connect(err => {
     getItems();
 });
 
-// function interface() {
-//     inquirer.prompt([
-//     {
-//         type: "input",
-//         message: "What would you like to buy?",
-//         name: "itemId"
-//     }
-// ]).then(inquirerResponse => {
-//     var item = parseInt(inquirerResponse.itemId);
-//     getItems();
-// })
 //A function query that displays all items
 function getItems() {
     connection.query("SELECT * FROM products", (err, res) => {
@@ -48,7 +37,7 @@ function getItems() {
         ]).then(inquirerResponse => {
             var product = parseInt(inquirerResponse.productId) -1;
             var productQuantity = parseInt(inquirerResponse.productQuantity);
-            if (productQuantity <= 0) {
+            if (productQuantity <= 0 //Make it so they cant go below zero) {
                 console.log("Sorry! We are currently sold out of that item.");
             } else {
                 console.log(`You would like to purchase ${res[product].product_name}?`);
