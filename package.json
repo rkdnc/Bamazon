@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rkdnc/Bamazon#readme",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "inquirer": "^5.0.1",
     "mysql": "^2.15.0"
   }
